@@ -19,6 +19,7 @@ SHANGHAI = ZoneInfo("Asia/Shanghai")
 REPORTS = Path("reports")
 STATE = Path("state")
 INDEX = "sh000852"
+STRONG = "ma10_up_index_above_volume_turnover"
 
 
 def request(url, encoding="utf-8"):
@@ -51,6 +52,8 @@ def gate(closes):
         route = "ma10_down_below_2pct"
     elif current > previous and deviation < 0:
         route = "ma10_up_index_below"
+    elif current > previous and deviation > 0:
+        route = STRONG
     return route, current, previous, deviation
 
 
@@ -83,6 +86,23 @@ def first_boards(day, previous):
     return sorted(candidates, key=lambda row: row["code"])
 
 
+def strong_candidate(row, day):
+    symbol = row["market"] + row["code"]
+    start = date.fromisoformat(day) - timedelta(days=10)
+    query = urlencode({"param": f"{symbol},day,{start},{day},10,"})
+    result = json.loads(request(f"https://web.ifzq.gtimg.cn/appstock/app/newfqkline/get?{query}"))
+    bars = result["data"][symbol]["day"]
+    bar = next((item for item in bars if item[0] == day), None)
+    if bar is None or len(bar) < 9 or not bar[7] or not bar[8]:
+        raise RuntimeError(f"{symbol} 缺少 {day} 的成交额或换手率")
+    if Decimal(bar[2]) != Decimal(row["close"]):
+        raise RuntimeError(f"{symbol} {day} 两个行情源的收盘价不一致")
+    turnover, amount = Decimal(bar[7]), Decimal(bar[8]) * 10000
+    if not (Decimal(300000000) <= amount < Decimal(600000000) and turnover >= 6):
+        return None
+    return {**row, "turnover_pct": str(turnover), "amount_yuan": str(amount)}
+
+
 def publish(path, report):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -95,6 +115,7 @@ def markdown(report, opening=False):
     routes = {
         "ma10_down_below_2pct": "MA10 下行，指数低于 MA10 至少 2%",
         "ma10_up_index_below": "MA10 上行，指数收在 MA10 下方",
+        STRONG: "MA10 上行且指数高于 MA10，首板成交额 3 亿至不足 6 亿元、换手率至少 6%",
     }
     route = routes.get(report["route"], "未通过市场门控")
     lines = [f"# 2j3 {title} · {day}", ""]
@@ -111,6 +132,9 @@ def markdown(report, opening=False):
     if candidates:
         header = "| 代码 | 股票 | 首板收盘 |"
         divider = "| --- | --- | ---: |"
+        if report["route"] == STRONG:
+            header += " 首板成交额（亿元） | 首板换手率 |"
+            divider += " ---: | ---: |"
         if opening:
             header += " 开盘价 | 高开幅度 |"
             divider += " ---: | ---: |"
@@ -118,6 +142,10 @@ def markdown(report, opening=False):
         for row in candidates:
             name = row["name"].replace("|", "｜").replace("\n", " ")
             line = f"| {row['code']} | {name} | {row['close']} |"
+            if report["route"] == STRONG:
+                amount = Decimal(row["amount_yuan"]) / 100000000
+                turnover = Decimal(row["turnover_pct"])
+                line += f" {amount:.2f} | {turnover:.2f}% |"
             if opening:
                 line += f" {row['open']} | {Decimal(row['gap_pct']):+.2f}% |"
             lines.append(line)
@@ -149,7 +177,7 @@ def read_report(relative):
 def scan(day, skip_existing):
     if skip_existing:
         existing = read_report(Path(day))
-        if existing is not None:
+        if existing is not None and existing.get("strategy_version") == 2:
             publish_report(existing)
             return
     closes = index_days(day)
@@ -158,8 +186,12 @@ def scan(day, skip_existing):
         return
     route, ma, previous_ma, deviation = gate(list(closes.values()))
     candidates = first_boards(day, list(closes)[-2]) if route else []
+    if route == STRONG and candidates:
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            checked = executor.map(strong_candidate, candidates, [day] * len(candidates))
+            candidates = [row for row in checked if row is not None]
     publish_report({
-        "date": day, "status": "scanned", "route": route,
+        "date": day, "status": "scanned", "route": route, "strategy_version": 2,
         "index": {"code": "000852", "close": str(closes[day]), "ma10": str(ma),
                   "previous_ma10": str(previous_ma), "deviation_pct": str(deviation * 100)},
         "open_gap_pct": [2, 5], "candidates": candidates,
