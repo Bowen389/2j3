@@ -1,0 +1,61 @@
+name: 2j3 盘后预选与开盘筛选
+on:
+  schedule:
+    - cron: '0,30 9 * * MON-FRI'
+    - cron: '31 1 * * MON-FRI'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: '指定补扫日期 YYYY-MM-DD，留空使用北京时间当天'
+        type: string
+        required: false
+      opening:
+        description: '执行当天开盘筛选'
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['.github/workflows/daily.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: 2j3-reports
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Run scanner
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_DATE: ${{ inputs.date }}
+          INPUT_OPENING: ${{ inputs.opening }}
+        run: |
+          if [ "$EVENT" = push ]; then
+            python3 scan.py --date 2026-11-10 --skip-existing
+          elif [ "$SCHEDULE" = '31 1 * * MON-FRI' ] || [ "$INPUT_OPENING" = true ]; then
+            python3 scan.py --opening
+          elif [ -n "$INPUT_DATE" ]; then
+            python3 scan.py --date "$INPUT_DATE"
+          else
+            python3 scan.py --skip-existing
+          fi
+      - name: Publish reports
+        run: |
+          if [ ! -d reports ]; then exit 0; fi
+          git add reports
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Publish 2j3 signals'
+          git pull --rebase origin main
+          git push origin HEAD:main
