@@ -1,7 +1,8 @@
 {
   "date": "2026-11-11",
   "status": "scanned",
-  "route": null,
+  "route": "ma10_up_index_above_volume_turnover",
+  "strategy_version": 2,
   "index": {
     "code": "000852",
     "close": "6669.55",
@@ -13,5 +14,30 @@
     2,
     5
   ],
-  "candidates": []
+  "candidates": [
+    {
+      "code": "000407",
+      "name": "胜利股份",
+      "market": "sz",
+      "close": "4.35",
+      "turnover_pct": "10.50",
+      "amount_yuan": "392001200.00"
+    },
+    {
+      "code": "002154",
+      "name": "报 喜 鸟",
+      "market": "sz",
+      "close": "3.89",
+      "turnover_pct": "8.64",
+      "amount_yuan": "387164800.00"
+    },
+    {
+      "code": "600293",
+      "name": "三峡新材",
+      "market": "sh",
+      "close": "4.31",
+      "turnover_pct": "12.10",
+      "amount_yuan": "585993600.00"
+    }
+  ]
 }
