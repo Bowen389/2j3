@@ -53,6 +53,7 @@ jobs:
         run: |
           if [ ! -d reports ]; then exit 0; fi
           git add reports
+          if [ -d state ]; then git add state; fi
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
