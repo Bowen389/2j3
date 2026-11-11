@@ -17,6 +17,7 @@ from market_data import ROOT, package
 
 SHANGHAI = ZoneInfo("Asia/Shanghai")
 REPORTS = Path("reports")
+STATE = Path("state")
 INDEX = "sh000852"
 
 
@@ -88,18 +89,76 @@ def publish(path, report):
     print(f"Published {path}")
 
 
+def markdown(report, opening=False):
+    day = report["date"]
+    title = "开盘筛选" if opening else "盘后预选"
+    routes = {
+        "ma10_down_below_2pct": "MA10 下行，指数低于 MA10 至少 2%",
+        "ma10_up_index_below": "MA10 上行，指数收在 MA10 下方",
+    }
+    route = routes.get(report["route"], "未通过市场门控")
+    lines = [f"# 2j3 {title} · {day}", ""]
+    if opening:
+        lines.append(f"- 首板信号日为 {report['signal_date']}。")
+    else:
+        index = report["index"]
+        lines.extend([
+            f"- 中证1000收盘 {Decimal(index['close']):.2f}，MA10 为 {Decimal(index['ma10']):.2f}。",
+            f"- 前一交易日 MA10 为 {Decimal(index['previous_ma10']):.2f}，指数偏离 MA10 {Decimal(index['deviation_pct']):+.2f}%。",
+        ])
+    lines.extend([f"- 市场门控为「{route}」。", "- 开盘筛选区间为高开 2% 至 5%，含端点。", ""])
+    candidates = report["candidates"]
+    if candidates:
+        header = "| 代码 | 股票 | 首板收盘 |"
+        divider = "| --- | --- | ---: |"
+        if opening:
+            header += " 开盘价 | 高开幅度 |"
+            divider += " ---: | ---: |"
+        lines.extend([header, divider])
+        for row in candidates:
+            name = row["name"].replace("|", "｜").replace("\n", " ")
+            line = f"| {row['code']} | {name} | {row['close']} |"
+            if opening:
+                line += f" {row['open']} | {Decimal(row['gap_pct']):+.2f}% |"
+            lines.append(line)
+    else:
+        lines.append("没有符合条件的候选。")
+    if report.get("unavailable_codes"):
+        codes = "、".join(report["unavailable_codes"])
+        lines.extend(["", f"开盘价暂不可用的代码为 {codes}。"])
+    return "\n".join(lines) + "\n"
+
+
+def publish_report(report, opening=False):
+    relative = Path("opening") / report["date"] if opening else Path(report["date"])
+    publish((STATE / relative).with_suffix(".json"), report)
+    path = (REPORTS / relative).with_suffix(".md")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(markdown(report, opening), encoding="utf-8")
+    print(f"Published {path}")
+
+
+def read_report(relative):
+    for root in (STATE, REPORTS):
+        path = (root / relative).with_suffix(".json")
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    return None
+
+
 def scan(day, skip_existing):
-    path = REPORTS / f"{day}.json"
-    if skip_existing and path.exists():
-        print(f"Already published {path}")
-        return
+    if skip_existing:
+        existing = read_report(Path(day))
+        if existing is not None:
+            publish_report(existing)
+            return
     closes = index_days(day)
     if day not in closes:
         print(f"{day} has no index daily bar")
         return
     route, ma, previous_ma, deviation = gate(list(closes.values()))
     candidates = first_boards(day, list(closes)[-2]) if route else []
-    publish(path, {
+    publish_report({
         "date": day, "status": "scanned", "route": route,
         "index": {"code": "000852", "close": str(closes[day]), "ma10": str(ma),
                   "previous_ma10": str(previous_ma), "deviation_pct": str(deviation * 100)},
@@ -118,9 +177,9 @@ def quotes(symbols):
 
 
 def opening(day):
-    out = REPORTS / "opening" / f"{day}.json"
-    if out.exists():
-        print(f"Already published {out}")
+    existing = read_report(Path("opening") / day)
+    if existing is not None and existing["status"] == "complete":
+        publish_report(existing, opening=True)
         return
     stamp = day.replace("-", "")
     index_quote = quotes([INDEX]).get(INDEX, [])
@@ -133,10 +192,9 @@ def opening(day):
         return
     previous_days = index_days((date.fromisoformat(day) - timedelta(days=1)).isoformat())
     first = list(previous_days)[-1]
-    source = REPORTS / f"{first}.json"
-    if not source.exists():
-        raise RuntimeError(f"缺少上一交易日盘后报告 {source}")
-    report = json.loads(source.read_text(encoding="utf-8"))
+    report = read_report(Path(first))
+    if report is None:
+        raise RuntimeError(f"缺少上一交易日盘后报告 {first}")
     symbols = [row["market"] + row["code"] for row in report["candidates"]]
     data = quotes(symbols)
     passed, unavailable = [], []
@@ -154,9 +212,9 @@ def opening(day):
             passed.append((gap, {**row, "open": str(opened), "previous_close": str(previous),
                                  "gap_pct": f"{gap:.4f}"}))
     passed.sort(key=lambda item: (-item[0], item[1]["code"]))
-    publish(out, {"date": day, "signal_date": first, "route": report["route"],
+    publish_report({"date": day, "signal_date": first, "route": report["route"],
                   "status": "partial" if unavailable else "complete",
-                  "candidates": [row for _, row in passed], "unavailable_codes": unavailable})
+                  "candidates": [row for _, row in passed], "unavailable_codes": unavailable}, opening=True)
     if unavailable:
         print(f"开盘价暂不可用的代码: {', '.join(unavailable)}")
 
