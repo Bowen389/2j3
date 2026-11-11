@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-11",
+  "status": "scanned",
+  "route": null,
+  "index": {
+    "code": "000852",
+    "close": "6669.55",
+    "ma10": "6450.653",
+    "previous_ma10": "6441.508",
+    "deviation_pct": "3.393408388267048312783217500"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": []
+}
