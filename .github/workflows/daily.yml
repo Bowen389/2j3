@@ -41,7 +41,7 @@ jobs:
           INPUT_OPENING: ${{ inputs.opening }}
         run: |
           if [ "$EVENT" = push ]; then
-            python3 scan.py --date 2026-11-11
+            python3 scan.py --skip-existing
           elif [ "$SCHEDULE" = '31 1 * * MON-FRI' ] || [ "$INPUT_OPENING" = true ]; then
             python3 scan.py --opening
           elif [ -n "$INPUT_DATE" ]; then
