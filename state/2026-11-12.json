@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-12",
+  "status": "scanned",
+  "route": "ma10_up_index_above_volume_turnover",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "6537.84",
+    "ma10": "6466.559",
+    "previous_ma10": "6450.653",
+    "deviation_pct": "1.102301857912376582352376300"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "600853",
+      "name": "龙建股份",
+      "market": "sh",
+      "close": "4.21",
+      "turnover_pct": "9.81",
+      "amount_yuan": "406689900.00"
+    }
+  ]
+}
