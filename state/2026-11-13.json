@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-13",
+  "status": "scanned",
+  "route": "ma10_up_index_below",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "6357.26",
+    "ma10": "6486.162",
+    "previous_ma10": "6466.559",
+    "deviation_pct": "-1.987338583279295213409717490"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000665",
+      "name": "湖北广电",
+      "market": "sz",
+      "close": "4.58"
+    },
+    {
+      "code": "002042",
+      "name": "华孚时尚",
+      "market": "sz",
+      "close": "3.62"
+    },
+    {
+      "code": "002425",
+      "name": "凯撒文化",
+      "market": "sz",
+      "close": "3.96"
+    },
+    {
+      "code": "002548",
+      "name": "金新农",
+      "market": "sz",
+      "close": "3.83"
+    },
+    {
+      "code": "600715",
+      "name": "文投控股",
+      "market": "sh",
+      "close": "3.40"
+    }
+  ]
+}
