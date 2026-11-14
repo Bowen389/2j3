@@ -33,21 +33,23 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install 'exchange-calendars>=4.11,<5'
       - name: Run scanner
         env:
-          EVENT: ${{ github.event_name }}
           SCHEDULE: ${{ github.event.schedule }}
           INPUT_DATE: ${{ inputs.date }}
           INPUT_OPENING: ${{ inputs.opening }}
         run: |
-          if [ "$EVENT" = push ]; then
-            python3 scan.py --skip-existing
-          elif [ "$SCHEDULE" = '31 1 * * MON-FRI' ] || [ "$INPUT_OPENING" = true ]; then
+          if [ "$SCHEDULE" = '31 1 * * MON-FRI' ] || [ "$INPUT_OPENING" = true ]; then
             python3 scan.py --opening
           elif [ -n "$INPUT_DATE" ]; then
             python3 scan.py --date "$INPUT_DATE"
           else
-            python3 scan.py --skip-existing
+            day=$(python3 -c 'from datetime import datetime, timedelta; from zoneinfo import ZoneInfo; from exchange_calendars import get_calendar; now=datetime.now(ZoneInfo("Asia/Shanghai")); cutoff=now.date()-timedelta(days=int(now.hour < 15)); print(get_calendar("XSHG").date_to_session(cutoff.isoformat(), direction="previous").date())')
+            python3 scan.py --date "$day" --skip-existing
           fi
       - name: Publish reports
         run: |
