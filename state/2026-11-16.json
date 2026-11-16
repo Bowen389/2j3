@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-16",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "6164.62",
+    "ma10": "6469.69",
+    "previous_ma10": "6486.162",
+    "deviation_pct": "-4.715372761291499283582366390"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000521",
+      "name": "长虹美菱",
+      "market": "sz",
+      "close": "4.31"
+    },
+    {
+      "code": "002035",
+      "name": "华帝股份",
+      "market": "sz",
+      "close": "4.68"
+    },
+    {
+      "code": "600386",
+      "name": "北巴传媒",
+      "market": "sh",
+      "close": "3.81"
+    },
+    {
+      "code": "600936",
+      "name": "北投科技",
+      "market": "sh",
+      "close": "4.02"
+    },
+    {
+      "code": "601188",
+      "name": "龙江交通",
+      "market": "sh",
+      "close": "4.73"
+    }
+  ]
+}
