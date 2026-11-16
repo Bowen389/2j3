@@ -1,7 +1,7 @@
 name: 2j3 盘后预选与开盘筛选
 on:
   schedule:
-    - cron: '0,30 9 * * MON-FRI'
+    - cron: '6,34 9 * * MON-FRI'
     - cron: '31 1 * * MON-FRI'
   workflow_dispatch:
     inputs:
