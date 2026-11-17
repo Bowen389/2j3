@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-17",
+  "signal_date": "2026-11-16",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "000521",
+      "name": "长虹美菱",
+      "market": "sz",
+      "close": "4.31",
+      "open": "4.40",
+      "previous_close": "4.31",
+      "gap_pct": "2.0882"
+    }
+  ],
+  "unavailable_codes": []
+}
