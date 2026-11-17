@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-17",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "6092.39",
+    "ma10": "6456.806",
+    "previous_ma10": "6469.69",
+    "deviation_pct": "-5.643905051506890558582680040"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000707",
+      "name": "双环科技",
+      "market": "sz",
+      "close": "4.59"
+    },
+    {
+      "code": "002652",
+      "name": "扬子新材",
+      "market": "sz",
+      "close": "4.40"
+    }
+  ]
+}
