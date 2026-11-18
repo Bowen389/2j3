@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-18",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "6052.82",
+    "ma10": "6410.907",
+    "previous_ma10": "6456.806",
+    "deviation_pct": "-5.585590307268534701876037200"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000711",
+      "name": "京蓝科技",
+      "market": "sz",
+      "close": "3.48"
+    },
+    {
+      "code": "000889",
+      "name": "中嘉博创",
+      "market": "sz",
+      "close": "3.38"
+    },
+    {
+      "code": "002042",
+      "name": "华孚时尚",
+      "market": "sz",
+      "close": "3.96"
+    },
+    {
+      "code": "600162",
+      "name": "香江控股",
+      "market": "sh",
+      "close": "3.29"
+    },
+    {
+      "code": "600405",
+      "name": "动力源",
+      "market": "sh",
+      "close": "4.62"
+    }
+  ]
+}
