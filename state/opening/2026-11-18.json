@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-18",
+  "signal_date": "2026-11-17",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "000707",
+      "name": "双环科技",
+      "market": "sz",
+      "close": "4.59",
+      "open": "4.81",
+      "previous_close": "4.59",
+      "gap_pct": "4.7930"
+    }
+  ],
+  "unavailable_codes": []
+}
