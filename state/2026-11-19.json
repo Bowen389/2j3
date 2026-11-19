@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-19",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5938.90",
+    "ma10": "6339.783",
+    "previous_ma10": "6410.907",
+    "deviation_pct": "-6.323292137917023342912525550"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "002418",
+      "name": "康盛股份",
+      "market": "sz",
+      "close": "4.02"
+    },
+    {
+      "code": "601616",
+      "name": "广电电气",
+      "market": "sh",
+      "close": "3.74"
+    }
+  ]
+}
