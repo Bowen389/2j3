@@ -1,8 +1,10 @@
 name: 2j3 盘后预选与开盘筛选
 on:
   schedule:
-    - cron: '6,34 9 * * MON-FRI'
+    # GitHub native schedule; UTC -> Asia/Shanghai 17:00 / 18:00
     - cron: '31 1 * * MON-FRI'
+    - cron: '0 9 * * 1-5'
+    - cron: '0 10 * * 1-5'
   workflow_dispatch:
     inputs:
       date:
