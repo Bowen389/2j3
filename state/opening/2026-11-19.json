@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-19",
+  "signal_date": "2026-11-18",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "600162",
+      "name": "香江控股",
+      "market": "sh",
+      "close": "3.29",
+      "open": "3.40",
+      "previous_close": "3.29",
+      "gap_pct": "3.3435"
+    },
+    {
+      "code": "000711",
+      "name": "京蓝科技",
+      "market": "sz",
+      "close": "3.48",
+      "open": "3.57",
+      "previous_close": "3.48",
+      "gap_pct": "2.5862"
+    }
+  ],
+  "unavailable_codes": []
+}
