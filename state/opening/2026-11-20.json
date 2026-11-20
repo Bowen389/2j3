@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-20",
+  "signal_date": "2026-11-19",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "601616",
+      "name": "广电电气",
+      "market": "sh",
+      "close": "3.74",
+      "open": "3.88",
+      "previous_close": "3.74",
+      "gap_pct": "3.7433"
+    }
+  ],
+  "unavailable_codes": []
+}
