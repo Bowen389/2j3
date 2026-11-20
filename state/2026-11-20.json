@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-20",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5648.63",
+    "ma10": "6254.111",
+    "previous_ma10": "6339.783",
+    "deviation_pct": "-9.681328009688347392619030910"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000607",
+      "name": "华媒控股",
+      "market": "sz",
+      "close": "3.73"
+    },
+    {
+      "code": "002086",
+      "name": "东方海洋",
+      "market": "sz",
+      "close": "3.75"
+    },
+    {
+      "code": "002548",
+      "name": "金新农",
+      "market": "sz",
+      "close": "3.76"
+    },
+    {
+      "code": "600327",
+      "name": "大东方",
+      "market": "sh",
+      "close": "4.83"
+    }
+  ]
+}
