@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-23",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5812.32",
+    "ma10": "6185.369",
+    "previous_ma10": "6254.111",
+    "deviation_pct": "-6.031151900557590016052397200"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000711",
+      "name": "京蓝科技",
+      "market": "sz",
+      "close": "4.25"
+    },
+    {
+      "code": "002036",
+      "name": "联创电子",
+      "market": "sz",
+      "close": "4.87"
+    },
+    {
+      "code": "600103",
+      "name": "青山纸业",
+      "market": "sh",
+      "close": "3.53"
+    },
+    {
+      "code": "601188",
+      "name": "龙江交通",
+      "market": "sh",
+      "close": "4.61"
+    },
+    {
+      "code": "601599",
+      "name": "浙文影业",
+      "market": "sh",
+      "close": "3.65"
+    }
+  ]
+}
