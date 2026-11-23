@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-23",
+  "signal_date": "2026-11-20",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "002548",
+      "name": "金新农",
+      "market": "sz",
+      "close": "3.76",
+      "open": "3.87",
+      "previous_close": "3.76",
+      "gap_pct": "2.9255"
+    }
+  ],
+  "unavailable_codes": []
+}
