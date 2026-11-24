@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-24",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5799.01",
+    "ma10": "6107.334",
+    "previous_ma10": "6185.369",
+    "deviation_pct": "-5.048422110203895840640122190"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "600261",
+      "name": "阳光照明",
+      "market": "sh",
+      "close": "4.85"
+    },
+    {
+      "code": "600400",
+      "name": "红豆股份",
+      "market": "sh",
+      "close": "3.62"
+    },
+    {
+      "code": "600715",
+      "name": "文投控股",
+      "market": "sh",
+      "close": "3.14"
+    }
+  ]
+}
