@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-25",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5541.55",
+    "ma10": "5994.534",
+    "previous_ma10": "6107.334",
+    "deviation_pct": "-7.556617411795479014715739370"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000702",
+      "name": "正虹科技",
+      "market": "sz",
+      "close": "4.88"
+    },
+    {
+      "code": "000908",
+      "name": "石药景峰",
+      "market": "sz",
+      "close": "4.81"
+    },
+    {
+      "code": "002038",
+      "name": "双鹭药业",
+      "market": "sz",
+      "close": "4.90"
+    },
+    {
+      "code": "002069",
+      "name": "獐子岛",
+      "market": "sz",
+      "close": "3.54"
+    },
+    {
+      "code": "002145",
+      "name": "钛能化学",
+      "market": "sz",
+      "close": "3.72"
+    },
+    {
+      "code": "600103",
+      "name": "青山纸业",
+      "market": "sh",
+      "close": "3.78"
+    },
+    {
+      "code": "600227",
+      "name": "赤天化",
+      "market": "sh",
+      "close": "3.23"
+    },
+    {
+      "code": "600467",
+      "name": "好当家",
+      "market": "sh",
+      "close": "3.60"
+    }
+  ]
+}
