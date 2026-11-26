@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-26",
+  "signal_date": "2026-11-25",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "600467",
+      "name": "好当家",
+      "market": "sh",
+      "close": "3.60",
+      "open": "3.78",
+      "previous_close": "3.60",
+      "gap_pct": "5.0000"
+    },
+    {
+      "code": "002069",
+      "name": "獐子岛",
+      "market": "sz",
+      "close": "3.54",
+      "open": "3.62",
+      "previous_close": "3.54",
+      "gap_pct": "2.2599"
+    }
+  ],
+  "unavailable_codes": []
+}
