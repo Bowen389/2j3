@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-26",
+  "status": "scanned",
+  "route": "ma10_down_below_2pct",
+  "strategy_version": 2,
+  "index": {
+    "code": "000852",
+    "close": "5531.84",
+    "ma10": "5893.934",
+    "previous_ma10": "5994.534",
+    "deviation_pct": "-6.143502794568110196008302770"
+  },
+  "open_gap_pct": [
+    2,
+    5
+  ],
+  "candidates": [
+    {
+      "code": "000889",
+      "name": "中嘉博创",
+      "market": "sz",
+      "close": "3.91"
+    },
+    {
+      "code": "000912",
+      "name": "泸天化",
+      "market": "sz",
+      "close": "3.27"
+    },
+    {
+      "code": "002081",
+      "name": "金 螳 螂",
+      "market": "sz",
+      "close": "4.38"
+    },
+    {
+      "code": "002086",
+      "name": "东方海洋",
+      "market": "sz",
+      "close": "4.77"
+    },
+    {
+      "code": "002141",
+      "name": "贤丰控股",
+      "market": "sz",
+      "close": "4.64"
+    },
+    {
+      "code": "002453",
+      "name": "华软科技",
+      "market": "sz",
+      "close": "4.46"
+    },
+    {
+      "code": "600185",
+      "name": "珠免集团",
+      "market": "sh",
+      "close": "4.71"
+    },
+    {
+      "code": "600963",
+      "name": "岳阳林纸",
+      "market": "sh",
+      "close": "3.49"
+    }
+  ]
+}
