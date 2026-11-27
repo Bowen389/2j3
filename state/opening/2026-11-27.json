@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-27",
+  "signal_date": "2026-11-26",
+  "route": "ma10_down_below_2pct",
+  "status": "complete",
+  "candidates": [
+    {
+      "code": "002453",
+      "name": "华软科技",
+      "market": "sz",
+      "close": "4.46",
+      "open": "4.66",
+      "previous_close": "4.46",
+      "gap_pct": "4.4843"
+    },
+    {
+      "code": "002081",
+      "name": "金 螳 螂",
+      "market": "sz",
+      "close": "4.38",
+      "open": "4.47",
+      "previous_close": "4.38",
+      "gap_pct": "2.0548"
+    }
+  ],
+  "unavailable_codes": []
+}
